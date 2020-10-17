@@ -6,7 +6,23 @@ function onReady(){
   console.log('hello from JQ');
   getTasks();
   $('#addTask').on('click', addTask);
+  $('#taskList').on('click', '.deleteBtn', deleteTask);
 }//end onReady
+
+function deleteTask(){
+  let taskId = $(this).closest('tr').data('id');
+  $.ajax({
+    method: 'DELETE',
+    url: `/toDo/${taskId}`
+  }).then(function(response){
+    getTasks();
+    console.log(response);
+  }).catch(function(error) {
+    console.log(error);   
+  })
+  
+}//end deleteTask
+
 
 function addTask(){
   let newTask = $('#taskInput').val();
@@ -15,7 +31,6 @@ function addTask(){
     url: '/toDo',
     data: {taskName: newTask}
   }).then(function(response){
-    $('#taskList').empty();
     getTasks();
     console.log(response);    
   }).catch(function(error) {
@@ -30,6 +45,7 @@ function getTasks(){
     url: '/toDo'
   }).then(function(response) {
     console.log(response);  
+    $('#taskList').empty();
     appendToDom(response);  
   }).catch(function(error){
     console.log('error in get', error);    
@@ -45,11 +61,11 @@ function appendToDom (array) {
       completedText = 'No'
     }
     $('#taskList').append(`
-      <tr>
+      <tr data-id=${task.id}>
         <td>${task.taskName}</td>
         <td>${completedText}</td>
         <td><button>Complete Task</button></td>
-        <td><button>Delete Task</button></td>
+        <td><button class="deleteBtn">Delete Task</button></td>
       </tr>
     `);
   }
