@@ -16,7 +16,14 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log('in post');
-  res.sendStatus(200)  
+  let queryText = `INSERT INTO "to-do" ("taskName") VALUES ('Laundry');`
+  pool.query(queryText).then((result) => {
+    console.log(result);
+    res.sendStatus(200);
+  }).catch((error) => {
+    console.log('error in post', error);
+    res.sendStatus(500);
+  });
 });
 
 
