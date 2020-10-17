@@ -42,7 +42,8 @@ router.delete('/:id', (req, res) => {
 
 router.put('/completed/:id', (req, res) => {
   let taskId = req.params.id;
-  let queryText = `UPDATE "to-do" SET "completed" = true WHERE "id" = ${taskId};`;
+  let completedYet = req.body.taskStatus;
+  let queryText = `UPDATE "to-do" SET "completed" = ${completedYet} WHERE "id" = ${taskId};`;
   pool.query(queryText).then((result) => {
     console.log(result);
     res.sendStatus(200);    
