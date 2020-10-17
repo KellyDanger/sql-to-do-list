@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 
 router.get('/', (req, res) => {
   console.log('in get');
-  let queryText = `SELECT * FROM "to-do";`;
+  let queryText = `SELECT * FROM "to-do" ORDER BY "id";`;
   pool.query(queryText).then((result) => {
     res.send(result.rows);
   }).catch((error) => {
@@ -29,8 +29,8 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  let taskID = req.params.id;
-  let queryText = `DELETE FROM "to-do" WHERE "id" = ${req.params.id};`
+  let taskId = req.params.id;
+  let queryText = `DELETE FROM "to-do" WHERE "id" = ${taskId};`
   pool.query(queryText).then((result) => {
     console.log(result);
     res.sendStatus(200);    
@@ -39,6 +39,18 @@ router.delete('/:id', (req, res) => {
     res.sendStatus(500);    
   });
 });
+
+router.put('/completed/:id', (req, res) => {
+  let taskId = req.params.id;
+  let queryText = `UPDATE "to-do" SET "completed" = true WHERE "id" = ${taskId};`;
+  pool.query(queryText).then((result) => {
+    console.log(result);
+    res.sendStatus(200);    
+  }).catch((error) => {
+    console.log('error in put', error);
+    res.sendStatus(500);
+  });
+})
 
 
 module.exports = router;
