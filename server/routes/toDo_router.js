@@ -16,7 +16,8 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log('in post');
-  let queryText = `INSERT INTO "to-do" ("taskName") VALUES ('Laundry');`
+  let taskInput = req.body.taskName
+  let queryText = `INSERT INTO "to-do" ("taskName") VALUES ('${taskInput}');`
   pool.query(queryText).then((result) => {
     console.log(result);
     res.sendStatus(200);
