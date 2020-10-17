@@ -5,10 +5,26 @@ $(document).ready(onReady);
 function onReady(){
   console.log('hello from JQ');
   getTasks();
+  $('#addTask').on('click', addTask);
 }//end onReady
 
+function addTask(){
+  let newTask = $('#taskInput').val();
+  $.ajax({
+    method: 'POST',
+    url: '/toDo',
+    data: {taskName: newTask}
+  }).then(function(response){
+    $('#taskList').empty();
+    getTasks();
+    console.log(response);    
+  }).catch(function(error) {
+    console.log(error);
+  });
+}//end add Task
+
 function getTasks(){
-  console.log('getting Tasks');
+  // console.log('getting Tasks');
   $.ajax({
     method: 'GET',
     url: '/toDo'
