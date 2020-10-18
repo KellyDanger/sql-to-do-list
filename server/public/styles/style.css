@@ -20,6 +20,7 @@ tr:nth-child(odd){
 }
 th {
   background-color: white;
+  font-size: x-large;
 }
 
 tr:hover {

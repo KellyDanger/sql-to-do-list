@@ -17,9 +17,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log('in post');
-  let taskInput = req.body.taskName
-  let queryText = `INSERT INTO "to-do" ("taskName") VALUES ('${taskInput}');`
-  pool.query(queryText).then((result) => {
+  let taskInput = req.body.taskName;
+  let queryText = `INSERT INTO "to-do" ("taskName") VALUES ($1);`;
+  pool.query(queryText, [taskInput]).then((result) => {
     console.log(result);
     res.sendStatus(200);
   }).catch((error) => {
@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   let taskId = req.params.id;
-  let queryText = `DELETE FROM "to-do" WHERE "id" = $1;`
+  let queryText = `DELETE FROM "to-do" WHERE "id" = $1;`;
   pool.query(queryText, [taskId]).then((result) => {
     console.log(result);
     res.sendStatus(200);    
