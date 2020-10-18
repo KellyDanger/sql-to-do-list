@@ -37,15 +37,21 @@ function completeTask(){
 
 function deleteTask(){
   let taskId = $(this).closest('tr').data('id');
-  $.ajax({
-    method: 'DELETE',
-    url: `/toDo/${taskId}`
-  }).then(function(response){
-    getTasks();
-    console.log(response);
-  }).catch(function(error) {
-    console.log(error);   
-  })
+  let answer = window.confirm('You SURE you want to give up?');
+  if(answer) {
+    $.ajax({
+      method: 'DELETE',
+      url: `/toDo/${taskId}`
+    }).then(function(response){
+      getTasks();
+      console.log(response);
+    }).catch(function(error) {
+      console.log(error);   
+    })
+  } else {
+    console.log('Ok we will keep it');
+  }
+  
 }//end deleteTask
 
 
