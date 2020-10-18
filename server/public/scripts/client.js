@@ -16,8 +16,10 @@ function completeTask(){
   let dataToSend = {}
   if(status === true){
     dataToSend = {taskStatus: false};
+    $(this).closest('tr').addClass('complete');
   }else {
     dataToSend = {taskStatus: true};
+    $(this).closest('tr').removeClass();
   }
   $.ajax({
     method: 'PUT',
@@ -29,8 +31,6 @@ function completeTask(){
   }).catch(function(error) {
     console.log(error);   
   })
- 
-  
 }//end completeTask
 
 function deleteTask(){
@@ -55,6 +55,7 @@ function addTask(){
     url: '/toDo',
     data: {taskName: newTask}
   }).then(function(response){
+    $('#taskInput').val('');
     getTasks();
     console.log(response);    
   }).catch(function(error) {
@@ -78,18 +79,21 @@ function getTasks(){
 
 function appendToDom (array) {
   let completedText = '';
+  let setClass = '';
   for(let task of array) {
     if(task.completed === true){
-      completedText = 'Yes! Good Job!'
+      completedText = 'Done! Good Job!'
+      setClass = 'complete'
     } else {
-      completedText = 'No'
+      completedText = 'Undone'
+      setClass = 'notComplete'
     }
     $('#taskList').append(`
-      <tr data-id=${task.id} data-complete=${task.completed}>
+      <tr data-id=${task.id} data-complete=${task.completed} class='${setClass}'>
         <td>${task.taskName}</td>
         <td>${completedText}</td>
-        <td><button class="completeBtn">Complete Task</button></td>
-        <td><button class="deleteBtn">Delete Task</button></td>
+        <td><button class="completeBtn">Change Status</button></td>
+        <td><button class="deleteBtn">Delete</button></td>
       </tr>
     `);
   }

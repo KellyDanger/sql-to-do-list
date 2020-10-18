@@ -30,8 +30,8 @@ router.post('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   let taskId = req.params.id;
-  let queryText = `DELETE FROM "to-do" WHERE "id" = ${taskId};`
-  pool.query(queryText).then((result) => {
+  let queryText = `DELETE FROM "to-do" WHERE "id" = $1;`
+  pool.query(queryText, [taskId]).then((result) => {
     console.log(result);
     res.sendStatus(200);    
   }).catch((error) => {
@@ -43,8 +43,8 @@ router.delete('/:id', (req, res) => {
 router.put('/completed/:id', (req, res) => {
   let taskId = req.params.id;
   let completedYet = req.body.taskStatus;
-  let queryText = `UPDATE "to-do" SET "completed" = ${completedYet} WHERE "id" = ${taskId};`;
-  pool.query(queryText).then((result) => {
+  let queryText = `UPDATE "to-do" SET "completed" = ${completedYet} WHERE "id" = $1;`;
+  pool.query(queryText, [taskId]).then((result) => {
     console.log(result);
     res.sendStatus(200);    
   }).catch((error) => {

@@ -1,0 +1,39 @@
+body {
+  text-align: center;
+  background-color: #e7d1f0;
+  font-family: 'Raleway', sans-serif;
+}
+table, th, td {
+  border: 2px solid #296a6e;
+  border-collapse: collapse;
+}
+table {
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+tr:nth-child(even){
+  background-color: #b3edf1;
+}
+tr:nth-child(odd){
+  background-color: #dfeff0;
+}
+th {
+  background-color: white;
+}
+
+tr:hover {
+  background-color:#00b1ba;
+}
+tr.complete {
+  background-color:#00b1ba;
+}
+
+
+button {
+  border-radius: 10px;
+}
+input {
+  border-radius: 5px;
+
+}
