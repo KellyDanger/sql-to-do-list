@@ -15,9 +15,9 @@ router.get('/', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/add/:name', (req, res) => {
   console.log('in post');
-  let taskInput = req.body.taskName;
+  let taskInput = req.params.name;
   let queryText = `INSERT INTO "to-do" ("taskName") VALUES ($1);`;
   pool.query(queryText, [taskInput]).then((result) => {
     console.log(result);

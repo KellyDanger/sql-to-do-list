@@ -52,8 +52,8 @@ function addTask(){
   let newTask = $('#taskInput').val();
   $.ajax({
     method: 'POST',
-    url: '/toDo',
-    data: {taskName: newTask}
+    url: `/toDo/add/${newTask}`,
+    // data: {taskName: newTask} passing user input as a param to allow for use of apostraphe in task creation
   }).then(function(response){
     $('#taskInput').val('');
     getTasks();
