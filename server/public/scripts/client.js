@@ -99,7 +99,7 @@ function appendToDom (array) {
         <td>${task.taskName}</td>
         <td>${completedText}</td>
         <td><button class="completeBtn">Change Status</button></td>
-        <td><button class="deleteBtn" data-toggle="modal" data-target="#myModal">Delete</button></td>
+        <td><button class="deleteBtn">Delete</button></td>
       </tr>
     `);
   }
