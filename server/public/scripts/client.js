@@ -7,7 +7,22 @@ function onReady(){
   getTasks();
   $('#addTask').on('click', addTask);
   $('#taskList').on('click', '.deleteBtn', deleteTask);
+  $('#taskList').on('click', '.completeBtn', completeTask);
 }//end onReady
+
+function completeTask(){
+  let taskId = $(this).closest('tr').data('id');
+  $.ajax({
+    method: 'PUT',
+    url: `/toDo/completed/${taskId}`,
+    data: {taskStatus: true}
+  }).then(function(response){
+    getTasks();
+    console.log(response);
+  }).catch(function(error) {
+    console.log(error);   
+  })
+}//end completeTask
 
 function deleteTask(){
   let taskId = $(this).closest('tr').data('id');
@@ -64,9 +79,10 @@ function appendToDom (array) {
       <tr data-id=${task.id}>
         <td>${task.taskName}</td>
         <td>${completedText}</td>
-        <td><button>Complete Task</button></td>
+        <td><button class="completeBtn">Complete Task</button></td>
         <td><button class="deleteBtn">Delete Task</button></td>
       </tr>
     `);
   }
 }//end appendToDom
+
