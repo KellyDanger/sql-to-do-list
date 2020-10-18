@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     console.log('error in get', error);
     res.sendStatus(500)  
   });
-});
+});//end GET route
 
 router.post('/add/:name', (req, res) => {
   console.log('in post');
@@ -26,7 +26,7 @@ router.post('/add/:name', (req, res) => {
     console.log('error in post', error);
     res.sendStatus(500);
   });
-});
+});//end POST route
 
 router.delete('/:id', (req, res) => {
   let taskId = req.params.id;
@@ -38,7 +38,7 @@ router.delete('/:id', (req, res) => {
     console.log('error in DELETE', error);
     res.sendStatus(500);    
   });
-});
+});//end Delete route
 
 router.put('/completed/:id', (req, res) => {
   let taskId = req.params.id;
@@ -51,7 +51,7 @@ router.put('/completed/:id', (req, res) => {
     console.log('error in put', error);
     res.sendStatus(500);
   });
-})
+});//end PUT route
 
 
 module.exports = router;

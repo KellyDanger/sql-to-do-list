@@ -14,6 +14,7 @@ function completeTask(){
   let taskId = $(this).closest('tr').data('id');
   let status = $(this).closest('tr').data('complete');
   let dataToSend = {}
+  //allow user to toggle a task from done to undone and back
   if(status === true){
     dataToSend = {taskStatus: false};
     $(this).closest('tr').addClass('complete');
@@ -33,6 +34,7 @@ function completeTask(){
   })
 }//end completeTask
 
+
 function deleteTask(){
   let taskId = $(this).closest('tr').data('id');
   $.ajax({
@@ -44,7 +46,6 @@ function deleteTask(){
   }).catch(function(error) {
     console.log(error);   
   })
-  
 }//end deleteTask
 
 
@@ -64,7 +65,6 @@ function addTask(){
 }//end add Task
 
 function getTasks(){
-  // console.log('getting Tasks');
   $.ajax({
     method: 'GET',
     url: '/toDo'
