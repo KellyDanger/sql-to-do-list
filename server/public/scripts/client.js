@@ -12,16 +12,25 @@ function onReady(){
 
 function completeTask(){
   let taskId = $(this).closest('tr').data('id');
+  let status = $(this).closest('tr').data('complete');
+  let dataToSend = {}
+  if(status === true){
+    dataToSend = {taskStatus: false};
+  }else {
+    dataToSend = {taskStatus: true};
+  }
   $.ajax({
     method: 'PUT',
     url: `/toDo/completed/${taskId}`,
-    data: {taskStatus: true}
+    data: dataToSend
   }).then(function(response){
     getTasks();
     console.log(response);
   }).catch(function(error) {
     console.log(error);   
   })
+ 
+  
 }//end completeTask
 
 function deleteTask(){
@@ -76,7 +85,7 @@ function appendToDom (array) {
       completedText = 'No'
     }
     $('#taskList').append(`
-      <tr data-id=${task.id}>
+      <tr data-id=${task.id} data-complete=${task.completed}>
         <td>${task.taskName}</td>
         <td>${completedText}</td>
         <td><button class="completeBtn">Complete Task</button></td>
