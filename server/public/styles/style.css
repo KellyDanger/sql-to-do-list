@@ -3,14 +3,14 @@ body {
   background-color: #531b69;
   font-family: 'Raleway', sans-serif;
 }
-header, label {
+header {
   color: #b3edf1;
   position: sticky;
 }
 #toDoList {
   width: 80%;
   margin-left: 10%;
-  padding: 10%;
+  padding: 1% 10% 10% 10%;
   background-color: #e7d1f0;
 }
 table, th, td {
